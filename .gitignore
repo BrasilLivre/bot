@@ -89,3 +89,6 @@ ENV/
 .ropeproject
 venv
 venv/
+
+# They contain information that you should avoid sharing, like token's, hash's etc
+api/api/secret.py
