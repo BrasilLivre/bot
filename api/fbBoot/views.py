@@ -37,7 +37,7 @@ def post_facebook_message(fbid, recevied_message):
     pprint(status.json())
 
 # Create your views here.
-class YoMamaBotView(generic.View):
+class BotView(generic.View):
     def get(self, request, *args, **kwargs):
         if self.request.GET['hub.verify_token'] == VERIFY_TOKEN:
             return HttpResponse(self.request.GET['hub.challenge'])
