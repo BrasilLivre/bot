@@ -4,7 +4,7 @@ from django.views import generic
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from ../api/secret.py import PAGE_ACCESS_TOKEN,VERIFY_TOKEN
+from django.conf import settings
 
 
 jokes = { 'stupid': ["""Yo' Mama is so stupid, she needs a recipe to make ice cubes.""",
