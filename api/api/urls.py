@@ -18,6 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^fbBoot/', include('fbBot.urls')),
+    url(r'^fbBot/', include('fbBot.urls')),
 
 ]
