@@ -4,8 +4,10 @@ from django.views import generic
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from django.conf import settings
+import sys
 
+sys.path.insert(0, sys.path[0]+'/api')
+from secret import PAGE_ACCESS_TOKEN,VERIFY_TOKEN,HashKey
 
 jokes = { 'stupid': ["""Yo' Mama is so stupid, she needs a recipe to make ice cubes.""",
                      """Yo' Mama is so stupid, she thinks DNA is the National Dyslexics Association."""],
@@ -34,7 +36,6 @@ def post_facebook_message(fbid, recevied_message):
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
     response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":joke_text}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
-    pprint(status.json())
 
 # Create your views here.
 class BotView(generic.View):
@@ -60,7 +61,7 @@ class BotView(generic.View):
                 # This might be delivery, optin, postback for other events
                 if 'message' in message:
                     # Print the message to the terminal
-                    pprint(message)
+                    print message
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
                     # are sent as attachments and must be handled accordingly.
                     post_facebook_message(message['sender']['id'], message['message']['text'])
